@@ -5,6 +5,10 @@ print(f"Getting stock data for {ticker}...")
 
 stock_data = yf.download(ticker, period="1y", auto_adjust=True, progress=False)
 
+if stock_data is None or stock_data.empty:
+    print(f"Error: Could not retrieve data for {ticker}")
+    exit(1)
+
 # Show the last 5 days of data
 print(f"\nLast 5 days of data for {ticker}:")
 recent_data = stock_data.tail(5)
